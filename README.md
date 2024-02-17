@@ -18,7 +18,7 @@ A command line tool built with Go to easily create a license for your project
 ## Example
 
 ```
-License_Wizard MIT
+licensewizard MIT
 Author: <Your Name>
 Project: <Your Project>
 Output Directory: <Set Output Directory>
