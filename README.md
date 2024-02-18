@@ -13,6 +13,10 @@ A command line tool built with Go to easily create a license for your project
 * GPL 3.0
 * MPL 2.0
 * CCZERO v1.0
+* ECLIPSE 2.0
+* LGPL 2.1
+* BOOST
+* UNLICENSE
 ```
 
 ## Example
