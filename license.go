@@ -16,14 +16,19 @@ type TemplateData struct {
 }
 
 var LicenseTemplates = map[string]string{
-	"MIT":        "templates/mit.tmpl",
-	"BSD_2.0":    "templates/bsd2.0.tmpl",
-	"BSD_3.0":    "templates/bsd3.0.tmpl",
-	"APACHE_2.0": "templates/apache2.0.tmpl",
-	"AGPL_3.0":   "templates/agpl3.0.tmpl",
-	"GPL_3.0":    "templates/gpl3.0.tmpl",
-	"MPL_2.0":    "templates/mpl2.0.tmpl",
-	"CCZERO_1.0": "templates/ccszero1.0.tmpl",
+	"MIT":         "templates/mit.tmpl",
+	"BSD_2.0":     "templates/bsd2.0.tmpl",
+	"BSD_3.0":     "templates/bsd3.0.tmpl",
+	"APACHE_2.0":  "templates/apache2.0.tmpl",
+	"AGPL_3.0":    "templates/agpl3.0.tmpl",
+	"GPL_3.0":     "templates/gpl3.0.tmpl",
+	"GPL_2.0":     "templates/gpl2.0.tmpl",
+	"MPL_2.0":     "templates/mpl2.0.tmpl",
+	"CCZERO_1.0":  "templates/ccszero1.0.tmpl",
+	"ECLIPSE_2.0": "templates/eclipse2.0.tmpl",
+	"LGPL_2.1":    "templates/lgpl2.1.tmpl",
+	"UNLICENSE":   "templates/unlicense.tmpl",
+	"BOOST":       "templates/boost.tmpl",
 }
 
 func getUserInput(message string) string {
@@ -56,7 +61,7 @@ func generateLicense(templateText, author, project string) (string, error) {
 
 func main() {
 	if len(os.Args) != 2 {
-		fmt.Println("Unsupported LICENSE type please use supported LICENSES:\nMIT\nBSD_2.0\nBSD_3.0\nAPACHE_2.0\nAGPL_3.0\nGPL_3.0\nMPL_2.0\nCCZERO_1.0")
+		fmt.Println("Unsupported LICENSE type please use supported LICENSES:\nMIT\nBSD_2.0\nBSD_3.0\nAPACHE_2.0\nAGPL_3.0\nGPL_3.0\nGPL_2.0\nMPL_2.0\nCCZERO_1.0\nECLIPSE_2.0\nLGPL_2.1\nUNLICENSE\nBOOST")
 		os.Exit(1)
 	}
 
@@ -64,7 +69,7 @@ func main() {
 
 	templatePath, ok := LicenseTemplates[licenseType]
 	if !ok {
-		fmt.Println("Unsupported LICENSE type please use supported LICENSES:\nMIT\nBSD_2.0\nBSD_3.0\nAPACHE_2.0\nAGPL_3.0\nGPL_3.0\nMPL_2.0\nCCZERO_1.0")
+		fmt.Println("Unsupported LICENSE type please use supported LICENSES:\nMIT\nBSD_2.0\nBSD_3.0\nAPACHE_2.0\nAGPL_3.0\nGPL_3.0\nGPL_2.0\nMPL_2.0\nCCZERO_1.0\nECLIPSE_2.0\nLGPL_2.1\nUNLICENSE\nBOOST")
 		os.Exit(1)
 	}
 
@@ -80,7 +85,7 @@ func main() {
 
 	licenseText, err := generateLicense(string(templateText), author, project)
 	if err != nil {
-		fmt.Printf("Error generating license: %v\n", err)
+		fmt.Printf("Error generating LICENSE: %v\n", err)
 		os.Exit(1)
 	}
 
