@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"embed"
 	"fmt"
 	"os"
 	"strings"
@@ -15,20 +16,23 @@ type TemplateData struct {
 	Project string
 }
 
+//go:embed templates/*
+var templateFiles embed.FS
+
 var LicenseTemplates = map[string]string{
-	"MIT":         "templates/mit.tmpl",
-	"BSD_2.0":     "templates/bsd2.0.tmpl",
-	"BSD_3.0":     "templates/bsd3.0.tmpl",
-	"APACHE_2.0":  "templates/apache2.0.tmpl",
-	"AGPL_3.0":    "templates/agpl3.0.tmpl",
-	"GPL_3.0":     "templates/gpl3.0.tmpl",
-	"GPL_2.0":     "templates/gpl2.0.tmpl",
-	"MPL_2.0":     "templates/mpl2.0.tmpl",
-	"CCZERO_1.0":  "templates/ccszero1.0.tmpl",
-	"ECLIPSE_2.0": "templates/eclipse2.0.tmpl",
-	"LGPL_2.1":    "templates/lgpl2.1.tmpl",
-	"UNLICENSE":   "templates/unlicense.tmpl",
-	"BOOST":       "templates/boost.tmpl",
+	"MIT":         "mit.tmpl",
+	"BSD_2.0":     "bsd2.0.tmpl",
+	"BSD_3.0":     "bsd3.0.tmpl",
+	"APACHE_2.0":  "apache2.0.tmpl",
+	"AGPL_3.0":    "agpl3.0.tmpl",
+	"GPL_3.0":     "gpl3.0.tmpl",
+	"GPL_2.0":     "gpl2.0.tmpl",
+	"MPL_2.0":     "mpl2.0.tmpl",
+	"CCZERO_1.0":  "ccszero1.0.tmpl",
+	"ECLIPSE_2.0": "eclipse2.0.tmpl",
+	"LGPL_2.1":    "lgpl2.1.tmpl",
+	"UNLICENSE":   "unlicense.tmpl",
+	"BOOST":       "boost.tmpl",
 }
 
 func getUserInput(message string) string {
@@ -67,7 +71,7 @@ func main() {
 
 	licenseType := strings.ToUpper(os.Args[1])
 
-	templatePath, ok := LicenseTemplates[licenseType]
+	templateFile, ok := LicenseTemplates[licenseType]
 	if !ok {
 		fmt.Println("Unsupported LICENSE type please use supported LICENSES:\nMIT\nBSD_2.0\nBSD_3.0\nAPACHE_2.0\nAGPL_3.0\nGPL_3.0\nGPL_2.0\nMPL_2.0\nCCZERO_1.0\nECLIPSE_2.0\nLGPL_2.1\nUNLICENSE\nBOOST")
 		os.Exit(1)
@@ -77,7 +81,7 @@ func main() {
 	project := getUserInput("Project name: ")
 	outputDir := getUserInput("Output Directory: ")
 
-	templateText, err := os.ReadFile(templatePath)
+	templateText, err := templateFiles.ReadFile("templates/" + templateFile)
 	if err != nil {
 		fmt.Printf("Error reading LICENSE file: %v\n", err)
 		os.Exit(1)

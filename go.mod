@@ -1,3 +1,3 @@
-module license_generator
+module licensewizard
 
 go 1.21.6
