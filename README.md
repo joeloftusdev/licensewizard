@@ -23,7 +23,7 @@ The program will then prompt you to enter the author name, project name, and out
 Example:
 
 ```bash
-$ license-generator MIT
+$ licensewizard MIT
 Author: John Doe
 Project name: MyProject
 Output Directory: /path/to/output
